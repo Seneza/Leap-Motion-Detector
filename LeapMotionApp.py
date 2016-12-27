@@ -32,6 +32,9 @@ class LeapMotionListener(Leap.Listener):
 		for hand in frame.hands:
 			hand_type = "Left Hand " if hand.is_left else "Right Hand"
 			print(hand_type + " Hand ID: " + str(hand.id) + " Palm Position: " + str(hand.palm_position))
+			normal = hand.palm_normal
+			direction = hand.direction
+			print("Pitch: " + str(direction.pitch * Leap.RAD_TO_DEG) + " Roll: " + str(normal.roll * Leap.RAD_TO_DEG) + " Yaw: " + str(direction.yaw * Leap.RAD_TO_DEG))
 
 
 def main():
