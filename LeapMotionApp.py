@@ -18,16 +18,21 @@ class LeapMotionListener(Leap.Listener):
 	def on_connect(self, controller):
 		print("Motion sensor connected!")
 
-		controller.enable_gesture(Leap.Gesture.TYPE_CIRCLE):
-		controller.enable_gesture(Leap.Gesture.TYPE_KEY_TAP):
-		controller.enable_gesture(Leap.Gesture.TYPE_SCREEN_TAP):
-		controller.enable_gesture(Leap.Gesture.TYPE_SWIPE):
+		controller.enable_gesture(Leap.Gesture.TYPE_CIRCLE);
+		controller.enable_gesture(Leap.Gesture.TYPE_KEY_TAP);
+		controller.enable_gesture(Leap.Gesture.TYPE_SCREEN_TAP);
+		controller.enable_gesture(Leap.Gesture.TYPE_SWIPE);
 
 	def on_disconnect(self, controller):
 		print("Exited")
 
 	def on_frame(self, controller):
-		pass
+		frame = controller.frame()
+
+		for hand in frame.hands:
+			hand_type = "Left Hand " if hand.is_left else "Right Hand"
+			print(hand_type + " Hand ID: " + str(hand.id) + " Palm Position: " + str(hand.palm_position))
+
 
 def main():
 	listener = LeapMotionListener()
